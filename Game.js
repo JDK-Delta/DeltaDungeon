@@ -1,7 +1,8 @@
 console.log(`This is a test`);
 
-{
+try {
   let canvas;
+  let context;
 
   function init(){
     canvas = document.createElement('canvas');
@@ -16,12 +17,24 @@ console.log(`This is a test`);
 
       z-index:99999;
 
-      background-color:white;
-      border: 1px solid black;
+      background-color:#00000044;
+      border: 3px solid white;
     `;
     document.body.appendChild(canvas);
+
+    context = canvas.getContext('2d',{ alpha: true });
+
+    let world = new World();
+
+    let entity = new Tile();
+    world.spawn(entity);
   };
 
+  ⵠ.log(`Starting up DeltaDungeon`);
 
-  init();
+  ⵠ.scripts.push(() => {
+    init();
+  })
+} catch (e) {
+  console.error(e);
 }
