@@ -2,14 +2,21 @@
     Position.js
 */
 
+
 class Position {
 
-  #axis = [];
-
   constructor(...axis){
-    this.#axis = axis;
+    this.axis = axis;
   };
 
-  
 
-}
+  /*
+      Modify
+  */
+
+  modify(modifier){
+    this.axis = modifier(...this.axis);
+  };
+};
+
+finish('mechanic/Position.js');

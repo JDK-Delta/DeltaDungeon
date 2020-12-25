@@ -42,20 +42,24 @@ try {
 
     ⵠ.log('before controls');
 
+    let world = new World();
+    let player = new Player();
+    world.spawn(player,400,200);
+
     let moves = [
-      [ 0,-1], // Back
+      [ 0, 1], // Back
       [-1, 0], // Left
-      [-1, 1], // Left Forward
-      [ 0, 1], // Forward
-      [ 1, 1], // Right Forward
+      [-1,-1], // Left Forward
+      [ 0,-1], // Forward
+      [ 1,-1], // Right Forward
       [ 1, 0]  // Right
     ];
 
-    let direction = 3;
 
     Controls.onKey('down',0,() => {
       console.log('Button 1 pressed');
-      console.log('moving relative [X,Y]: ',moves[direction]);
+      // console.log('moving relative [X,Y]: ',moves[direction]);
+      player.move(...moves[player.rotation].map((dir) => dir * 50));
     });
 
     Controls.onKey('down',1,() => {
@@ -66,21 +70,28 @@ try {
       console.log('Button 3 pressed');
     });
 
-    Controls.onDir((dir) => {
-      direction = dir;
-    });
+    Controls.onDir((dir) => player.rotation = dir);
 
-    ⵠ.log('after controls')
+    ⵠ.log('after controls');
+
+    function render(){
+      context.clearRect(0,0,800,450);
+
+      world.entities.forEach((entity) => {
+        entity.draw(context);
+      });
+
+      setTimeout(render,200);
+    };
+
+    render();
 
     // let texture = new DeltaDungeon.Texture('default',`C:/Users/John/mblock/Scripts/DeltaDungeon/assets/Test.png`)
     // texture.onLoad(() => {
     //   console.log('Loaded',texture);
     // });
     //
-    // let world = new World();
-    //
-    // let entity = new Tile();
-    // world.spawn(entity);
+
   };
 
   ⵠ.log(`Starting up DeltaDungeon`);
@@ -91,3 +102,5 @@ try {
 } catch (e) {
   ⵠ.error(e);
 }
+
+finish('Game.js');

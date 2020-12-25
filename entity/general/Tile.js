@@ -2,11 +2,12 @@
     Tile.js
 */
 
-class Tile extends Enity {
 
-  #texture = null;
-
+class Tile extends Entity {
   constructor(...args){
     super(...args);
   };
 }
+
+
+finish('entity/general/Tile.js');

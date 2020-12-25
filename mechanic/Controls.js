@@ -4,7 +4,7 @@
 
 Controls = {};
 
-{
+try {
   let last = [0,0,0,0];
   const events = Map.fromObject({
     'down': [],
@@ -60,4 +60,6 @@ Controls = {};
     .get('dir')
     .push(callback);
   };
-}
+} catch (e) { console.log(e); }
+
+finish('mechanic/Controls.js');

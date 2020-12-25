@@ -2,13 +2,34 @@
     Entity.js
 */
 
+
 class Entity {
 
-  #position = null;
-
   constructor(position){
-    this.#position = position;
+    this.position = position;
+    this.rotation = 0;
   };
 
-  
+
+  /*
+      Move
+  */
+
+  move(ⵠx,ⵠy){
+    this.position.modify((x,y) => [
+      x + ⵠx,
+      y + ⵠy
+    ]);
+  };
+
+
+  /*
+      Draw
+  */
+
+  draw(context){
+    console.log('empty context');
+  };
 }
+
+finish('entity/Entity.js');

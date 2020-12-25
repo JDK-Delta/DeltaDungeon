@@ -2,6 +2,7 @@
     Item.js
 */
 
+
 class Item extends Entity {
 
 
@@ -9,3 +10,6 @@ class Item extends Entity {
 
   }
 }
+
+
+finish('entity/general/Item.js');
