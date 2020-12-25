@@ -1,11 +1,14 @@
 console.log(`This is a test`);
 
+DeltaDungeon = {};
+
 try {
-  let canvas;
-  let context;
+  let
+    canvas,
+    context;
 
   function init(){
-    canvas = document.createElement('canvas');
+    canvas = create('canvas');
     canvas.setAttribute('width',800);
     canvas.setAttribute('height',450);
     canvas.style = `
@@ -20,14 +23,64 @@ try {
       background-color:#00000044;
       border: 3px solid white;
     `;
-    document.body.appendChild(canvas);
+    canvas.appendTo(document.body);
 
     context = canvas.getContext('2d',{ alpha: true });
 
-    let world = new World();
 
-    let entity = new Tile();
-    world.spawn(entity);
+
+
+    // ⵠ.log(window.MbApi.file);
+    // ⵠ.log(ⵠ.root);
+
+    // const image = document.createElement('img');
+    // image.src = `C:/Users/John/mblock/Scripts/DeltaDungeon/assets/Test.png`;
+    // image.onload = () => {
+    //   console.log('image lado',image);
+    // }
+    // document.body.appendChild(image);
+
+    ⵠ.log('before controls');
+
+    let moves = [
+      [ 0,-1], // Back
+      [-1, 0], // Left
+      [-1, 1], // Left Forward
+      [ 0, 1], // Forward
+      [ 1, 1], // Right Forward
+      [ 1, 0]  // Right
+    ];
+
+    let direction = 3;
+
+    Controls.onKey('down',0,() => {
+      console.log('Button 1 pressed');
+      console.log('moving relative [X,Y]: ',moves[direction]);
+    });
+
+    Controls.onKey('down',1,() => {
+      console.log('Button 2 pressed');
+    });
+
+    Controls.onKey('down',2,() => {
+      console.log('Button 3 pressed');
+    });
+
+    Controls.onDir((dir) => {
+      direction = dir;
+    });
+
+    ⵠ.log('after controls')
+
+    // let texture = new DeltaDungeon.Texture('default',`C:/Users/John/mblock/Scripts/DeltaDungeon/assets/Test.png`)
+    // texture.onLoad(() => {
+    //   console.log('Loaded',texture);
+    // });
+    //
+    // let world = new World();
+    //
+    // let entity = new Tile();
+    // world.spawn(entity);
   };
 
   ⵠ.log(`Starting up DeltaDungeon`);
@@ -36,5 +89,5 @@ try {
     init();
   })
 } catch (e) {
-  console.error(e);
+  ⵠ.error(e);
 }
