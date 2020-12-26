@@ -6,9 +6,9 @@
 class Item extends Entity {
 
 
-  constructor(){
-
-  }
+  constructor(...args){
+    super('item',...args);
+  };
 }
 
 

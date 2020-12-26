@@ -8,6 +8,9 @@ try {
     context;
 
   function init(){
+
+    /*  Canvas  */
+
     canvas = create('canvas');
     canvas.setAttribute('width',800);
     canvas.setAttribute('height',450);
@@ -29,17 +32,6 @@ try {
 
 
 
-
-    // ⵠ.log(window.MbApi.file);
-    // ⵠ.log(ⵠ.root);
-
-    // const image = document.createElement('img');
-    // image.src = `C:/Users/John/mblock/Scripts/DeltaDungeon/assets/Test.png`;
-    // image.onload = () => {
-    //   console.log('image lado',image);
-    // }
-    // document.body.appendChild(image);
-
     ⵠ.log('before controls');
 
     let world = new World();
@@ -59,9 +51,7 @@ try {
 
 
     Controls.onKey('down',0,() => {
-      console.log('Button 1 pressed');
-      // console.log('moving relative [X,Y]: ',moves[direction]);
-      player.move(...moves[player.rotation]);//.map((dir) => dir * 50));
+      player.move(...moves[player.rotation]);
     });
 
     Controls.onKey('down',1,() => {
@@ -70,6 +60,7 @@ try {
 
     Controls.onKey('down',2,() => {
       console.log('Button 3 pressed');
+      // Disconnect
     });
 
     Controls.onDir((dir) => player.rotation = dir);
@@ -79,8 +70,10 @@ try {
     function render(){
       context.clearRect(0,0,800,450);
 
-      world.entities.forEach((entity) => {
-        entity.draw(context);
+      world.entities.forEach((tile) => {
+        tile.forEach((entity) => {
+          entity.draw(context);
+        });
       });
 
       setTimeout(render,200);
@@ -88,12 +81,9 @@ try {
 
     render();
 
-    // let texture = new DeltaDungeon.Texture('default',`C:/Users/John/mblock/Scripts/DeltaDungeon/assets/Test.png`)
-    // texture.onLoad(() => {
-    //   console.log('Loaded',texture);
-    // });
-    //
 
+    // ⵠ.log(window.MbApi.file);
+    // ⵠ.log(ⵠ.root);
   };
 
   ⵠ.log(`Starting up DeltaDungeon`);

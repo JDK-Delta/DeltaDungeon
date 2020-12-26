@@ -5,7 +5,7 @@
 
 class Player extends Entity {
   constructor(position){
-    super(position);
+    super('player',position);
   };
 
 

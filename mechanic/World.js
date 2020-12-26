@@ -15,8 +15,17 @@ class World {
   */
 
   spawn(entity,x = 0,y = 0){
-    entity.position = new Position(x,y);
-    this.entities.set(entity.position.id(),entity);
+    const position = new Position(x,y);
+    entity.position = position;
+    entity.world = this;
+    
+    const
+      id = position.id(),
+      { entities } = this;
+
+    const set = entities.get(id) || new Set();
+    set.add(entity);
+    entities.set(id,set);
   };
 };
 

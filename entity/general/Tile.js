@@ -5,7 +5,7 @@
 
 class Tile extends Entity {
   constructor(...args){
-    super(...args);
+    super('tile',...args);
   };
 
 

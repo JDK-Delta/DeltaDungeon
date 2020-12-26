@@ -5,18 +5,22 @@
 
 class Position {
 
+  static toId(...axis){
+    return axis.join(':');
+  };
+
   constructor(...axis){
     this.axis = axis;
   };
 
 
-  /*
-      Modify
-  */
-
-  modify(modifier){
-    this.axis = modifier(...this.axis);
-  };
+  // /*
+  //     Modify
+  // */
+  //
+  // modify(modifier){
+  //   this.axis = modifier(...this.axis);
+  // };
 
 
   /*
@@ -24,7 +28,7 @@ class Position {
   */
 
   id(){
-    return this.axis.join(':');
+    return Position.toId(this.axis);
   };
 };
 
