@@ -44,7 +44,9 @@ try {
 
     let world = new World();
     let player = new Player();
-    world.spawn(player,400,200);
+    world.spawn(player,8,4);
+    let tile1 = new Tile();
+    world.spawn(tile1,9,4);
 
     let moves = [
       [ 0, 1], // Back
@@ -59,7 +61,7 @@ try {
     Controls.onKey('down',0,() => {
       console.log('Button 1 pressed');
       // console.log('moving relative [X,Y]: ',moves[direction]);
-      player.move(...moves[player.rotation].map((dir) => dir * 50));
+      player.move(...moves[player.rotation]);//.map((dir) => dir * 50));
     });
 
     Controls.onKey('down',1,() => {

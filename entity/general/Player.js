@@ -25,7 +25,7 @@ class Player extends Entity {
     context.strokeStyle = 'white';
     context.lineWidth = 5;
     context.beginPath();
-    context.arc(x,y,25,...angles);
+    context.arc(x * 50,y * 50,20,...angles);
     context.stroke();
   };
 };

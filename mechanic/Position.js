@@ -17,6 +17,15 @@ class Position {
   modify(modifier){
     this.axis = modifier(...this.axis);
   };
+
+
+  /*
+      Id
+  */
+
+  id(){
+    return this.axis.join(':');
+  };
 };
 
 finish('mechanic/Position.js');

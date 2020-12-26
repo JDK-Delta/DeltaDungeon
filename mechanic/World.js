@@ -16,7 +16,7 @@ class World {
 
   spawn(entity,x = 0,y = 0){
     entity.position = new Position(x,y);
-    this.entities.set(uuid(),entity);
+    this.entities.set(entity.position.id(),entity);
   };
 };
 
