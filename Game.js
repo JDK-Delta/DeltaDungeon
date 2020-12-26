@@ -37,8 +37,20 @@ try {
     let world = new World();
     let player = new Player();
     world.spawn(player,8,4);
-    let tile1 = new Tile();
-    world.spawn(tile1,9,4);
+
+    let level = [
+      /*  Room 1  */
+      [0,0],[1,0],[2,0],[3,0],[4,0],
+      [5,0],[5,1],[5,2],[5,4],[5,5],
+      [5,6],[4,6],[3,6],[2,6],[1,6],
+      [0,6],[0,5],[0,4],[0,3],[0,2],
+      [0,1]
+    ];
+
+    level.forEach((pos) => {
+      world.spawn(new Tile(),...pos);
+    })
+
 
     let moves = [
       [ 0, 1], // Back
