@@ -14,23 +14,18 @@ class Player extends Entity {
   */
 
   draw(context){
-    const { position , rotation } = this;
-    const [ x , y ] = position.axis;
+    const
+      { position , rotation } = this,
+      [ x , y ] = position.axis,
+      angle = rotation ? rotation * 0.25 + 0.75 : 0.5,
+      angles = [0.12,-0.12]
+        .add(angle)
+        .multiply(Math.PI);
 
-    let angle = Math.PI;
-
-    if(rotation > 0)
-      angle = Math.PI * ((rotation - 1) * 0.25 - 0.5);
-
-    angle -= Math.PI * 0.5;
-
-    // ⵠ.log(angle,x,y,this.rotation);
-
-    context.strokeStyle = 'black';
+    context.strokeStyle = 'white';
     context.lineWidth = 5;
     context.beginPath();
-    context.arc(x,y,25,angle + Math.PI * 0.12,angle + Math.PI * 1.87)
-    context.arc(x,y,25,angle + Math.PI * 1.87,angle - Math.PI * 0.12)
+    context.arc(x,y,25,...angles);
     context.stroke();
   };
 };
