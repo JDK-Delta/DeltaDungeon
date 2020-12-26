@@ -1,56 +1,62 @@
-console.log(`This is a test`);
-
 DeltaDungeon = {};
 
 try {
-  let
-    canvas,
-    context;
+
+  ⵠ.scripts.push(init);
+
+
+  /*
+      Init
+  */
 
   function init(){
+    console.log(`-> Initializing`);
 
-    /*  Canvas  */
+    DeltaDungeon.world = new World();
+    DeltaDungeon.player = new Player();
 
-    canvas = create('canvas');
-    canvas.setAttribute('width',800);
-    canvas.setAttribute('height',450);
-    canvas.style = `
-      position: absolute;
-      width: 800px;
-      height: 450px;
-      right: 0;
-      bottom: 0;
-
-      z-index:99999;
-
-      background-color:#00000044;
-      border: 3px solid white;
-    `;
-    canvas.appendTo(document.body);
-
-    context = canvas.getContext('2d',{ alpha: true });
-
-
-
-    ⵠ.log('before controls');
-
-    let world = new World();
-    let player = new Player();
+    const { world , player } = DeltaDungeon;
     world.spawn(player,8,4);
 
-    let level = [
-      /*  Room 1  */
-      [0,0],[1,0],[2,0],[3,0],[4,0],
-      [5,0],[5,1],[5,2],[5,4],[5,5],
-      [5,6],[4,6],[3,6],[2,6],[1,6],
-      [0,6],[0,5],[0,4],[0,3],[0,2],
-      [0,1]
-    ];
+    buildLevel();
+    registerControls();
+
+    Renderer.start();
+  };
+
+
+  /*
+      Level
+  */
+
+  function buildLevel(){
+    console.log(`-> Building Level`);
+
+    const
+      { world } = DeltaDungeon,
+      level = [
+        /*  Room 1  */
+        [0,0],[1,0],[2,0],[3,0],[4,0],
+        [5,0],[5,1],[5,2],[5,4],[5,5],
+        [5,6],[4,6],[3,6],[2,6],[1,6],
+        [0,6],[0,5],[0,4],[0,3],[0,2],
+        [0,1]
+      ];
 
     level.forEach((pos) => {
       world.spawn(new Tile(),...pos);
-    })
+    });
+  };
 
+
+  /*
+      Controls
+  */
+
+  function registerControls(){
+    console.log(`-> Registering Controls`);
+
+    const { player } = DeltaDungeon;
 
     let moves = [
       [ 0, 1], // Back
@@ -76,33 +82,7 @@ try {
     });
 
     Controls.onDir((dir) => player.rotation = dir);
-
-    ⵠ.log('after controls');
-
-    function render(){
-      context.clearRect(0,0,800,450);
-
-      world.entities.forEach((tile) => {
-        tile.forEach((entity) => {
-          entity.draw(context);
-        });
-      });
-
-      setTimeout(render,200);
-    };
-
-    render();
-
-
-    // ⵠ.log(window.MbApi.file);
-    // ⵠ.log(ⵠ.root);
   };
-
-  ⵠ.log(`Starting up DeltaDungeon`);
-
-  ⵠ.scripts.push(() => {
-    init();
-  })
 } catch (e) {
   ⵠ.error(e);
 }
