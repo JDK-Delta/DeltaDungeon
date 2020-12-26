@@ -18,38 +18,37 @@ class Entity {
   */
 
   move(...ⵠ){
-    const pos = this.position.axis;
-    const next = pos.add(ⵠ);
-    const id = Position.toId(next);
-    const { entities } = this.world;
+    const
+      pos = this.position.axis,
+      next = pos.add(ⵠ),
+      old = Position.toId(pos),
+      id = Position.toId(next);
 
-    // console.log('entities',entities);
-    entities.forEach(console.log);
-    // console.log(...entities.keys());
+    const
+      { entities } = this.world,
+      list = entities.get(id);
 
-    // console.log(ⵠ,pos,next);
 
-    const list = entities.get(id) || new Set();
+    /*  Add  */
 
-    // console.log(id,list);
+    if(list){
+      if(list.count((entity) => entity.type === 'tile') < 1)
+        list.add(this);
+      else
+        return;
+    } else {
+      entities.set(id,Set.from(this));
+    }
 
-    list.forEach((entity) => {
-      console.log('type',entity.type);
 
+    /*  Remove  */
+
+    optional(entities.get(old))((list) => {
+      list.delete(this);
     });
 
-    console.log('tiles',list.filter((entity) => entity.type === 'tile').length)
 
-    if(list.filter((entity) => entity.type === 'tile').length > 0)
-      return;
-
-    const old = entities
-    .get(Position.toId(pos))
-    if(old)
-      old.delete(this);
-
-    list.add(this);
-    entities.set(id,list);
+    /*  Update  */
 
     this.position.axis = next;
   };
