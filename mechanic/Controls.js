@@ -14,9 +14,21 @@ try {
 
 
   ⵠ.Meta.onCall('update_controls',(args = '') => {
-    args
-    .chars()
-    .map(Number)
+    const values = args
+      .match(/(\d)(\d)(\d)(\d+)/)
+      .map(Number);
+
+    values.shift();
+
+    {
+      const dir = values[3];
+      values[3] = dir < 122 || dir > 900 ? 0 : Math.ceil((dir - 122) / 128);
+    }
+
+    // args
+    // .chars()
+    // .map(Number)
+    values
     .forEach((value,index) => {
       if(last[index] === value)
         return;
