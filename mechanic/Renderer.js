@@ -55,10 +55,18 @@ const Renderer = {}
   */
 
   function render(){
+    const { entities , tiles } = DeltaDungeon.world;
+
     context.clearRect(0,0,800,450);
 
-    DeltaDungeon.world.entities.forEach((tile) => {
-      tile.forEach((entity) => {
+    tiles.forEach((tile) => {
+      tile.draw(context);
+    });
+
+    entities.forEach((tile) => {
+      tile
+      .filter((entity) => entity.type !== 'tile')
+      .forEach((entity) => {
         entity.draw(context);
       });
     });

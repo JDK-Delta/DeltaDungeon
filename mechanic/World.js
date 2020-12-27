@@ -7,6 +7,7 @@ class World {
 
   constructor(){
     this.entities = new Map();
+    this.tiles = new Map();
   };
 
 
@@ -18,14 +19,17 @@ class World {
     const position = new Position(x,y);
     entity.position = position;
     entity.world = this;
-    
+
     const
       id = position.id(),
-      { entities } = this;
+      { tiles , entities } = this;
 
     const set = entities.get(id) || new Set();
     set.add(entity);
     entities.set(id,set);
+
+    if(entity.type === 'tile')
+      tiles.set(id,entity);
   };
 };
 

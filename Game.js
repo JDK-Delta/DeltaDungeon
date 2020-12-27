@@ -46,6 +46,9 @@ try {
     level.forEach((pos) => {
       world.spawn(new Tile(),...pos);
     });
+
+    const key_red = new Item('key_red');
+    world.spawn(key_red,1,1);
   };
 
 
