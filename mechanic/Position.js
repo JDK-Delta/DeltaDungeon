@@ -5,22 +5,15 @@
 
 class Position {
 
-  static toId(...axis){
+  static toId(axis = []){
     return axis.join(':');
   };
 
-  constructor(...axis){
+
+  constructor(world,...axis){
+    this.world = world;
     this.axis = axis;
   };
-
-
-  // /*
-  //     Modify
-  // */
-  //
-  // modify(modifier){
-  //   this.axis = modifier(...this.axis);
-  // };
 
 
   /*
@@ -29,6 +22,31 @@ class Position {
 
   id(){
     return Position.toId(this.axis);
+  };
+
+
+  /*
+      Entities
+  */
+
+  entities(){
+    const { entities } = this.world;
+    return entities.get(this.id()) || [];
+  };
+
+
+  /*
+      Relative
+  */
+
+  relative(direction = 0,distance = 1){
+    const
+      { moves } = DeltaDungeon,
+      { axis , world } = this,
+      transformed = axis
+        .add(moves[direction]);
+
+    return new Position(this.world,...transformed);
   };
 };
 

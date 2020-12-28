@@ -32,7 +32,7 @@ class Entity {
     /*  Add  */
 
     if(list){
-      if(list.count((entity) => entity.type === 'tile') < 1)
+      if(list.count((entity) => entity.solid) < 1)
         list.add(this);
       else
         return;
@@ -61,6 +61,15 @@ class Entity {
   draw(context){
     console.log('empty context');
   };
-}
+
+
+  /*
+      Despawn
+  */
+
+  despawn(){
+    this.world.despawn(this);
+  };
+};
 
 finish('entity/Entity.js');

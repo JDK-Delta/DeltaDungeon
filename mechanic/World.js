@@ -16,7 +16,7 @@ class World {
   */
 
   spawn(entity,x = 0,y = 0){
-    const position = new Position(x,y);
+    const position = new Position(this,x,y);
     entity.position = position;
     entity.world = this;
 
@@ -30,6 +30,24 @@ class World {
 
     if(entity.type === 'tile')
       tiles.set(id,entity);
+  };
+
+
+  /*
+      Despawn
+  */
+
+  despawn(entity){
+    const
+      id = entity.position.id(),
+      { tiles , entities } = this;
+
+    if(entity.type === 'tile')
+      tiles.delete(id);
+
+    entities
+    .get(id)
+    .delete(entity);
   };
 };
 
