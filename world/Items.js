@@ -16,6 +16,20 @@ Items = {
     action: () => {
       DeltaDungeon.keys.push('green');
     }
+  },
+  key_yellow: {
+    name: 'Yellow Key',
+    color: '#FFFF00AA',
+    action: () => {
+      DeltaDungeon.keys.push('yellow');
+    }
+  },
+  key_white: {
+    name: 'White Key',
+    color: '#FFFFFFAA',
+    action: () => {
+      DeltaDungeon.keys.push('white');
+    }
   }
 };
 

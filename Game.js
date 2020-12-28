@@ -45,7 +45,10 @@ try {
 
     const
       { world } = DeltaDungeon,
-      level = [];
+      level = [
+        [7,2],[8,2],[10,2],[10,3],
+        [11,6],[12,6],[10,8],[15,4]
+      ];
 
 
     room(0,0,16,9);
@@ -55,27 +58,56 @@ try {
 
     const tiles = new Map();
     level.forEach((axis) => tiles.set(Position.toId(axis),axis));
-    console.log(tiles);
     tiles.delete('5:3');
     tiles.delete('1:5');
     tiles.delete('7:7');
     tiles.delete('9:6');
+    tiles.delete('13:7');
 
     tiles.forEach((pos) => {
       world.spawn(new Tile(),...pos);
     });
 
-    const key_green = new Item('key_green');
-    world.spawn(key_green,1,1);
+    const keys= [{
+      id: 'key_green',
+      pos: [1,1]
+    },{
+      id: 'key_red',
+      pos: [6,5]
+    },{
+      id: 'key_yellow',
+      pos: [9,3]
+    },{
+      id: 'key_white',
+      pos: [15,5]
+    }];
 
-    const key_red = new Item('key_red');
-    world.spawn(key_red,6,5);
+    keys.forEach(({ id , pos }) => {
+      world.spawn(new Item(id),...pos);
+    });
 
-    const door_red = new Door('red','#FF0000AA');
-    world.spawn(door_red,5,3);
 
-    const door_green = new Door('green','#00FF00AA');
-    world.spawn(door_green,7,7);
+    const doors = [{
+      key: 'red',
+      color: '#FF0000AA',
+      pos: [5,3]
+    },{
+      key: 'green',
+      color: '#00FF00AA',
+      pos: [7,7]
+    },{
+      key: 'yellow',
+      color: '#FFFF00AA',
+      pos: [13,7]
+    },{
+      key: 'white',
+      color: '#FFFFFFAA',
+      pos: [10,1]
+    }];
+
+    doors.forEach(({ key , pos , color }) => {
+      world.spawn(new Door(key,color),...pos);
+    });
 
 
     /*
