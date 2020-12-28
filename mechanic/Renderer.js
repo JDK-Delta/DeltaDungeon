@@ -51,6 +51,16 @@ const Renderer = {}
 
 
   /*
+      Stop
+  */
+
+  function stop(callback){
+    this.interrupt = true;
+    this.callback = callback;
+  };
+
+
+  /*
       Render
   */
 
@@ -70,6 +80,9 @@ const Renderer = {}
         entity.draw(context);
       });
     });
+
+    if(this.interrupt)
+      return this.callback(Renderer);
 
     setTimeout(render,200);
   };

@@ -7,7 +7,10 @@ DeltaDungeon = {
     [ 0,-1], // Forward
     [ 1,-1], // Right Forward
     [ 1, 0]  // Right
-  ]
+  ],
+  finish: () => {
+    
+  }
 };
 
 try {
@@ -108,6 +111,9 @@ try {
     doors.forEach(({ key , pos , color }) => {
       world.spawn(new Door(key,color),...pos);
     });
+
+
+    world.spawn(new Goal(),15,2);
 
 
     /*

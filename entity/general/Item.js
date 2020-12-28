@@ -6,7 +6,6 @@
 class Item extends Entity {
 
 
-
   constructor(id){
     super('item');
 
