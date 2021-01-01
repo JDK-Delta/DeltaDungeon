@@ -49,6 +49,10 @@ const Keys = {};
     onListen('next_indicator_r',r);
     onListen('next_indicator_g',g);
     onListen('next_indicator_b',b);
+    onListen('buzzer',200);
+    setTimeout(() => {
+      onListen('buzzer',0);
+    },400);
   };
 }
 
