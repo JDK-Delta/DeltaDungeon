@@ -34,7 +34,7 @@ class Door extends Entity {
   */
 
   use(){
-    if(DeltaDungeon.keys.includes(this.key))
+    if(Keys.has(this.key))
       this.despawn();
   };
 }

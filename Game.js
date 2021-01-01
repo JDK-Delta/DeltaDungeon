@@ -9,7 +9,7 @@ DeltaDungeon = {
     [ 1, 0]  // Right
   ],
   finish: () => {
-    
+
   }
 };
 
@@ -34,6 +34,8 @@ try {
 
     buildLevel();
     registerControls();
+
+    Keys.update();
 
     Renderer.start();
   };
