@@ -48,6 +48,32 @@ class Position {
 
     return new Position(this.world,...transformed);
   };
+
+
+  /*
+      Difference
+  */
+
+  difference({ axis } = {}){
+    return this.axis
+      .map((a,index) => {
+        return axis[index] - a;
+      });
+  };
+
+
+  /*
+      Surrounding
+  */
+
+  surrounding(){
+    return [
+      this.relative(0,1),
+      this.relative(1,1),
+      this.relative(3,1),
+      this.relative(5,1)
+    ];
+  };
 };
 
 finish('mechanic/Position.js');

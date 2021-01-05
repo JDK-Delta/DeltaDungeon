@@ -28,8 +28,18 @@ class World {
     set.add(entity);
     entities.set(id,set);
 
-    if(entity.type === 'tile')
+    if(entity.type === 'tile'){
       tiles.set(id,entity);
+
+      position
+      .surrounding()
+      .map((pos) => pos.id())
+      .forEach((id) => {
+        tiles.ⵠGet(id)((tile) => {
+          tile.neighbour(entity,position,true);
+        });
+      });
+    }
   };
 
 
@@ -42,8 +52,18 @@ class World {
       id = entity.position.id(),
       { tiles , entities } = this;
 
-    if(entity.type === 'tile')
+    if(entity.type === 'tile'){
       tiles.delete(id);
+
+      position
+      .surrounding()
+      .map((pos) => pos.id())
+      .forEach((id) => {
+        tiles.ⵠGet(id)((tile) => {
+          tile.neighbour(entity,position,false);
+        });
+      });
+    }
 
     entities
     .get(id)

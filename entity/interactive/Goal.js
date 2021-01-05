@@ -45,4 +45,4 @@ class Goal extends Entity {
 }
 
 
-finish('entity/interactive/Door.js');
+finish('entity/interactive/Goal.js');
