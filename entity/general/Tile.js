@@ -26,6 +26,49 @@ class Tile extends Entity {
 
     const { '0:-1': up , '1:0': right , '0:1': down , '-1:0': left } = neighbours;
 
+    const id =
+      (up ? '1' : '0') +
+      (right ? '1' : '0') +
+      (down ? '1' : '0') +
+      (left ? '1' : '0');
+
+
+    const arc = (x,y,radius,start,end) => {
+      start *= Math.PI;
+      end *= Math.PI;
+      context.arc(x,y,radius,start,end);
+    };
+
+    const iArc = (rel_x,rel_y,radius,start,end) => {
+      rel_x += x;
+      rel_y += y;
+
+      context.moveTo(rel_x,rel_y);
+      context.beginPath();
+      arc(rel_x,rel_y,radius,start,end);
+    };
+
+    const oArc = (rel_x,rel_y,radius,start,end) => {
+      rel_x += x;
+      rel_y += y;
+
+      context.beginPath();
+      context.moveTo(rel_x,rel_y);
+      arc(rel_x,rel_y,radius,start,end);
+    };
+
+    const rect = (rel_x,rel_y,w,h) => {
+      context.rect(x + rel_x,y + rel_y,w,h);
+    };
+
+    const line = (rel_x,rel_y) => {
+      context.lineTo(x + rel_x,y + rel_y);
+    };
+
+    const fill = () => context.fill();
+    const close = () => context.closePath();
+
+
     if(up && right && left && down || !(
       up && right && !down && !left ||
       up && left && !down && !right ||
@@ -37,50 +80,28 @@ class Tile extends Entity {
       right && !left && !down && !up
     )){
       context.beginPath();
-      context.rect(x - 15,y - 15,30,30);
-      context.fill();
+      rect(-15,-15,30,30);
+      fill();
     };
 
-    if(!up && !right && !left && !down){
-      context.beginPath();
-      context.arc(x,y,25,0,Math.PI * 2);
-      context.fill();
-    };
-
-
-    if(up && right && !left && !down){
-      context.beginPath();
-      context.moveTo(x + 15,y - 15);
-      context.arc(x + 15,y - 15,30,Math.PI * .5,Math.PI);
-      context.closePath();
-      context.fill();
+    if(id === '0000'){
+      oArc(0,0,25,0,2);
+      fill();
     };
 
 
-    if(up && left && !right && !down){
-      context.beginPath();
-      context.moveTo(x - 15,y - 15);
-      context.arc(x - 15,y - 15,30,0,Math.PI * .5);
-      context.closePath();
-      context.fill();
+    const edges = {
+      '1100': [+1,-1,0.5,1],
+      '1001': [-1,-1,0,0.5],
+      '0110': [+1,+1,1,1.5],
+      '0011': [-1,+1,1.5,2]
     };
 
-    if(down && right && !left && !up){
-      context.beginPath();
-      context.moveTo(x + 15,y + 15);
-      context.arc(x + 15,y + 15,30,Math.PI * 1,Math.PI * 1.5);
-      context.closePath();
-      context.fill();
-    };
-
-
-    if(down && left && !right && !up){
-      context.beginPath();
-      context.moveTo(x - 15,y + 15);
-      context.arc(x - 15,y + 15,30,Math.PI * 1.5,Math.PI * 2);
-      context.closePath();
-      context.fill();
-    };
+    optional(edges[id])(([ x , y , start , end ]) => {
+      oArc(x * 15,y * 15,30,start,end);
+      close();
+      fill();
+    });
 
 
     /*
@@ -90,100 +111,58 @@ class Tile extends Entity {
     */
 
 
-    if(down && !left && !right && !up){
-      context.beginPath();
-      context.rect(x - 15,y,30,15);
-      context.moveTo(x,y);
-      context.arc(x,y,15,Math.PI,0);
-      context.closePath();
-      context.fill();
+    const roundings = {
+      '1000': [0,1,-1,-1,2,1],
+      '0100': [.5,1.5,0,-1,1,2],
+      '0010': [1,0,-1,0,2,1],
+      '0001': [1.5,.5,-1,-1,1,2]
     };
 
-    if(up && !left && !right && !down){
-      context.beginPath();
-      context.rect(x - 15,y - 15,30,15);
-      context.moveTo(x,y);
-      context.arc(x,y,15,0,Math.PI);
-      context.closePath();
-      context.fill();
+    optional(roundings[id])(([ start , end , x , y , f1,f2]) => {
+      oArc(0,0,15,start,end);
+      rect(x * 15,y * 15,15 * f1,15 * f2);
+      close();
+      fill();
+    });
+
+
+    const side = (x,y,w,h) => {
+      rect(x,y,w * 10,h * 10);
+      fill();
     };
 
-    if(left && !up && !right && !down){
-      context.beginPath();
-      context.rect(x - 15,y - 15,15,30);
-      context.moveTo(x,y);
-      context.arc(x,y,15,Math.PI * 1.5,Math.PI * .5);
-      context.closePath();
-      context.fill();
-    };
+    if(up)
+      side(-15,-25,3,1);
 
-    if(right && !up && !left && !down){
-      context.beginPath();
-      context.rect(x,y - 15,15,30);
-      context.moveTo(x,y);
-      context.arc(x,y,15,Math.PI * .5,Math.PI * 1.5);
-      context.closePath();
-      context.fill();
-    };
+    if(right)
+      side(15,-15,1,3);
+
+    if(down)
+      side(-15,15,3,1);
+
+    if(left)
+      side(-25,-15,1,3);
 
 
-
-    if(up){
-      context.rect(x - 15,y - 25,30,10);
-      context.fill();
-    };
-
-    if(right){
-      context.rect(x + 15,y - 15,10,30);
-      context.fill();
-    };
-
-    if(down){
-      context.rect(x - 15,y + 15,30,10);
-      context.fill();
-    };
-
-    if(left){
-      context.rect(x - 25,y - 15,10,30);
-      context.fill();
-    };
+    const corner = (x,y,start,end) => {
+      iArc(x * 25,y * 25,10,start,end);
+      line(x * 15,y * 15);
+      close();
+      fill();
+    }
 
 
-    if(up && left){
-      context.moveTo(x - 25,y - 15);
-      context.beginPath();
-      context.arc(x - 25,y - 25,10,0,.5 * Math.PI);
-      context.lineTo(x - 15,y - 15);
-      context.closePath();
-      context.fill();
-    };
+    if(up && left)
+      corner(-1,-1,0,.5);
 
-    if(up && right){
-      context.moveTo(x + 25,y - 15);
-      context.beginPath();
-      context.arc(x + 25,y - 25,10,.5 * Math.PI,Math.PI);
-      context.lineTo(x + 15,y - 15);
-      context.closePath();
-      context.fill();
-    };
+    if(up && right)
+      corner(1,-1,.5,1);
 
-    if(down && left){
-      context.moveTo(x - 25,y + 15);
-      context.beginPath();
-      context.arc(x - 25,y + 25,10,Math.PI * 1.5,Math.PI * 2);
-      context.lineTo(x - 15,y + 15);
-      context.closePath();
-      context.fill();
-    };
+    if(down && left)
+      corner(-1,1,1.5,2);
 
-    if(down && right){
-      context.moveTo(x + 25,y + 15);
-      context.beginPath();
-      context.arc(x + 25,y + 25,10,Math.PI,Math.PI * 1.5);
-      context.lineTo(x + 15,y + 15);
-      context.closePath();
-      context.fill();
-    };
+    if(down && right)
+      corner(1,1,1,1.5);
   };
 
 
