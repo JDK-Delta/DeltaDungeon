@@ -74,10 +74,10 @@ try {
     });
 
     const keys= [{
-      id: 'key_green',
+      id: 'key_red',
       pos: [1,1]
     },{
-      id: 'key_red',
+      id: 'key_green',
       pos: [6,5]
     },{
       id: 'key_yellow',
@@ -93,12 +93,12 @@ try {
 
 
     const doors = [{
-      key: 'red',
-      color: '#FF0000AA',
-      pos: [5,3]
-    },{
       key: 'green',
       color: '#00FF00AA',
+      pos: [5,3]
+    },{
+      key: 'red',
+      color: '#FF0000AA',
       pos: [7,7]
     },{
       key: 'yellow',
