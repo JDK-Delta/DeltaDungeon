@@ -7,6 +7,8 @@ const Renderer = {}
 
 {
   Renderer.start = start;
+  Renderer.stop = stop;
+  Renderer.destroy = destroy;
 
   let
     canvas,
@@ -57,6 +59,17 @@ const Renderer = {}
   function stop(callback){
     this.interrupt = true;
     this.callback = callback;
+  };
+
+
+  /*
+      Destroy
+  */
+
+  function destroy(){
+    stop(() => {
+      canvas.remove();
+    });
   };
 
 

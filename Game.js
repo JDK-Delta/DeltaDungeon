@@ -9,7 +9,7 @@ DeltaDungeon = {
     [ 1, 0]  // Right
   ],
   finish: () => {
-
+    Renderer.destroy();
   }
 };
 
@@ -95,23 +95,27 @@ try {
     const doors = [{
       key: 'green',
       color: '#00FF00AA',
-      pos: [5,3]
+      pos: [5,3],
+      rotation: 1
     },{
       key: 'red',
       color: '#FF0000AA',
-      pos: [7,7]
+      pos: [7,7],
+      rotation: 0
     },{
       key: 'yellow',
       color: '#FFFF00AA',
-      pos: [13,7]
+      pos: [13,7],
+      rotation: 0
     },{
       key: 'white',
       color: '#FFFFFFAA',
-      pos: [10,1]
+      pos: [10,1],
+      rotation: 1
     }];
 
-    doors.forEach(({ key , pos , color }) => {
-      world.spawn(new Door(key,color),...pos);
+    doors.forEach(({ key , pos , color , rotation }) => {
+      world.spawn(new Door(key,color,rotation),...pos);
     });
 
 
