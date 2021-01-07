@@ -1,0 +1,24 @@
+Insert the following code in the 'Scripts.js' to have DeltaDungeon load.
+
+/*  Mechanics  */
+'DeltaDungeon/mechanic/Controls.js',
+'DeltaDungeon/mechanic/Position.js',
+'DeltaDungeon/mechanic/World.js',
+'DeltaDungeon/mechanic/Renderer.js',
+'DeltaDungeon/mechanic/Keys.js',
+
+/*  World  */
+'DeltaDungeon/world/Items.js',
+
+/*  Entities  */
+'DeltaDungeon/entity/Entity.js',
+'DeltaDungeon/entity/general/Item.js',
+'DeltaDungeon/entity/general/Tile.js',
+'DeltaDungeon/entity/general/Player.js',
+
+/*  Interactive  */
+'DeltaDungeon/entity/interactive/Door.js',
+'DeltaDungeon/entity/interactive/Goal.js',
+
+/*  Main  */
+'DeltaDungeon/Game.js'
