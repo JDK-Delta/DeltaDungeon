@@ -10,6 +10,17 @@ This project uses the [DeltaBlock] extension to execute additional scripts (this
 [Report]: https://github.com/JDK-Delta/DeltaDungeon/blob/main/Report.pdf
 [Commit]: https://github.com/JDK-Delta/DeltaDungeon/commit/452257c581f98641544553274be35202f8de2a1c
 
+
 ## General Structure
 
 The project uses an entity rendering system, whereas the entities are stored inside a world object.
+
+### Description of Classes
+
+|     Class     | Description |
+|:-------------:|-------------|
+|     Entity    | The base class for all entities. Contains the:
+* Position
+* Rotation
+* World
+* Type
