@@ -1,24 +1,24 @@
 Insert the following code in the 'Scripts.js' to have DeltaDungeon load.
 
 /*  Mechanics  */
-'DeltaDungeon/mechanic/Controls.js',
-'DeltaDungeon/mechanic/Position.js',
-'DeltaDungeon/mechanic/World.js',
-'DeltaDungeon/mechanic/Renderer.js',
-'DeltaDungeon/mechanic/Keys.js',
+'DeltaDungeon/source/mechanic/Controls.js',
+'DeltaDungeon/source/mechanic/Position.js',
+'DeltaDungeon/source/mechanic/World.js',
+'DeltaDungeon/source/mechanic/Renderer.js',
+'DeltaDungeon/source/mechanic/Keys.js',
 
 /*  World  */
-'DeltaDungeon/world/Items.js',
+'DeltaDungeon/source/world/Items.js',
 
 /*  Entities  */
-'DeltaDungeon/entity/Entity.js',
-'DeltaDungeon/entity/general/Item.js',
-'DeltaDungeon/entity/general/Tile.js',
-'DeltaDungeon/entity/general/Player.js',
+'DeltaDungeon/source/entity/Entity.js',
+'DeltaDungeon/source/entity/general/Item.js',
+'DeltaDungeon/source/entity/general/Tile.js',
+'DeltaDungeon/source/entity/general/Player.js',
 
 /*  Interactive  */
-'DeltaDungeon/entity/interactive/Door.js',
-'DeltaDungeon/entity/interactive/Goal.js',
+'DeltaDungeon/source/entity/interactive/Door.js',
+'DeltaDungeon/source/entity/interactive/Goal.js',
 
 /*  Main  */
-'DeltaDungeon/Game.js'
+'DeltaDungeon/source/Game.js'
